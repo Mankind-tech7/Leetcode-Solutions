@@ -2,21 +2,32 @@ class Solution {
     public ListNode sortList(ListNode head) 
     {
         if(head==null || head.next==null)
-        {
-            return head;
-        }
+            {
+                return head;
+            }
         ListNode mid=findmiddle(head);
-
+        
         ListNode right=mid.next;
         mid.next=null;
         ListNode left=head;
-
+        
         left=sortList(left);
         right=sortList(right);
-
+        
         return mergesortedList(left, right);
     }
-        public ListNode mergesortedList(ListNode list1, ListNode list2) {
+    public ListNode findmiddle(ListNode head) 
+    {
+        ListNode slow=head;
+        ListNode fast=head.next;
+        while(fast!=null && fast.next!=null)
+        {
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
+    }
+    public ListNode mergesortedList(ListNode list1, ListNode list2) {
         // Create a dummy node
         ListNode dummyNode = new ListNode(-1, null);
 
@@ -48,15 +59,4 @@ class Solution {
         return dummyNode.next;
     }
 
-    public ListNode findmiddle(ListNode head) 
-    {
-        ListNode slow=head;
-        ListNode fast=head.next;
-        while(fast!=null && fast.next!=null)
-        {
-            slow=slow.next;
-            fast=fast.next.next;
-        }
-        return slow;
-    }
 }
